@@ -35,59 +35,59 @@ matrix:
     # This environment tests the oldest supported anaconda env. Except some of these (i.e., statsmodels
     # and sklearn) require higher versions of numpy, so cannot really test *actual* oldest... this also
     # tests against linux.
-    - os: linux
-      dist: trusty
-      services:
-        - docker
-      env: DISTRIB="conda" PYTHON_VERSION="2.7" CYTHON_VERSION="0.23.5"
-           COVERAGE=true SCIKIT_LEARN_VERSION="0.17.1" DEPLOY=true CACHEC=true
-           DOCKER_IMAGE="quay.io/pypa/manylinux1_x86_64" DOCKER_CONTAINER_NAME="pyramidcontainer"
+    # - os: linux
+    #   dist: trusty
+    #   services:
+    #     - docker
+    #   env: DISTRIB="conda" PYTHON_VERSION="2.7" CYTHON_VERSION="0.23.5"
+    #        COVERAGE=true SCIKIT_LEARN_VERSION="0.17.1" DEPLOY=true CACHEC=true
+    #        DOCKER_IMAGE="quay.io/pypa/manylinux1_x86_64" DOCKER_CONTAINER_NAME="pyramidcontainer"
 
     # This environment tests against Linux with CPython 2.7.x built with UCS-4 encoding
-    - os: linux
-      dist: trusty
-      services:
-        - docker
-      env: DISTRIB="conda" PYTHON_VERSION="2.7" CYTHON_VERSION="0.23.5"
-           COVERAGE=true SCIKIT_LEARN_VERSION="0.17.1" DEPLOY=true CACHEC=true
-           DOCKER_IMAGE="quay.io/pypa/manylinux1_x86_64" DOCKER_CONTAINER_NAME="pyramidcontainer"
-           UCS_SETTING="ucs4"
+    # - os: linux
+    #   dist: trusty
+    #   services:
+    #     - docker
+    #   env: DISTRIB="conda" PYTHON_VERSION="2.7" CYTHON_VERSION="0.23.5"
+    #        COVERAGE=true SCIKIT_LEARN_VERSION="0.17.1" DEPLOY=true CACHEC=true
+    #        DOCKER_IMAGE="quay.io/pypa/manylinux1_x86_64" DOCKER_CONTAINER_NAME="pyramidcontainer"
+    #        UCS_SETTING="ucs4"
 
     # This environment tests the same conditions as above, but tests against MAC OS X,
     # using virtualenv instead of the conda python distribution
-    - os: osx
-      language: generic
-      env: DISTRIB="conda" PYTHON_VERSION="2.7" CYTHON_VERSION="0.23.5"
-           COVERAGE=true SCIKIT_LEARN_VERSION="0.17.1" DEPLOY=true CACHEC=false
+    # - os: osx
+    #   language: generic
+    #   env: DISTRIB="conda" PYTHON_VERSION="2.7" CYTHON_VERSION="0.23.5"
+    #        COVERAGE=true SCIKIT_LEARN_VERSION="0.17.1" DEPLOY=true CACHEC=false
 
     # This environment tests Python 3.5 support on linux
-    - os: linux
-      dist: trusty
-      services:
-        - docker
-      env: DISTRIB="conda" PYTHON_VERSION="3.5" INSTALL_MKL="true"
-           NUMPY_VERSION="1.12.1" SCIPY_VERSION="0.19.0" CYTHON_VERSION="0.25.2"
-           COVERAGE=true SCIKIT_LEARN_VERSION="0.18" STATSMODELS_VERSION="0.9.0"
-           DEPLOY=true CACHEC=true DOCKER_IMAGE="quay.io/pypa/manylinux1_x86_64"
-           DOCKER_CONTAINER_NAME="pyramidcontainer"
+    # - os: linux
+    #   dist: trusty
+    #   services:
+    #     - docker
+    #   env: DISTRIB="conda" PYTHON_VERSION="3.5" INSTALL_MKL="true"
+    #        NUMPY_VERSION="1.12.1" SCIPY_VERSION="0.19.0" CYTHON_VERSION="0.25.2"
+    #        COVERAGE=true SCIKIT_LEARN_VERSION="0.18" STATSMODELS_VERSION="0.9.0"
+    #        DEPLOY=true CACHEC=true DOCKER_IMAGE="quay.io/pypa/manylinux1_x86_64"
+    #        DOCKER_CONTAINER_NAME="pyramidcontainer"
 
     # This environment tests Python 3.5 support on MAC OS X, using virtualenv
     # instead of the conda python distribution
-    - os: osx
-      language: generic
-      env: DISTRIB="conda" PYTHON_VERSION="3.5"
-           NUMPY_VERSION="1.12.1" SCIPY_VERSION="0.19.0" CYTHON_VERSION="0.25.2"
-           COVERAGE=true SCIKIT_LEARN_VERSION="0.18" STATSMODELS_VERSION="0.9.0"
-           DEPLOY=true CACHEC=false
+    # - os: osx
+    #   language: generic
+    #   env: DISTRIB="conda" PYTHON_VERSION="3.5"
+    #        NUMPY_VERSION="1.12.1" SCIPY_VERSION="0.19.0" CYTHON_VERSION="0.25.2"
+    #        COVERAGE=true SCIKIT_LEARN_VERSION="0.18" STATSMODELS_VERSION="0.9.0"
+    #        DEPLOY=true CACHEC=false
 
     # This environment tests the newest supported Anaconda release (4.4.0) and
     # runs on linux
-    - os: linux
-      dist: trusty
-      env: DISTRIB="conda" PYTHON_VERSION="3.6.1" INSTALL_MKL="true"
-           NUMPY_VERSION="1.12.1" SCIPY_VERSION="0.19.0" CYTHON_VERSION="0.25.2"
-           COVERAGE=true SCIKIT_LEARN_VERSION="0.18" STATSMODELS_VERSION="0.9.0"
-           DEPLOY=false CACHEC=true
+    # - os: linux
+    #   dist: trusty
+    #   env: DISTRIB="conda" PYTHON_VERSION="3.6.1" INSTALL_MKL="true"
+    #        NUMPY_VERSION="1.12.1" SCIPY_VERSION="0.19.0" CYTHON_VERSION="0.25.2"
+    #        COVERAGE=true SCIKIT_LEARN_VERSION="0.18" STATSMODELS_VERSION="0.9.0"
+    #        DEPLOY=false CACHEC=true
 
     # This environment use pytest to run the tests. It uses the newest
     # supported Anaconda release (4.4.0) and tests with pytests instead of nosetests.
@@ -130,5 +130,5 @@ deploy:
   skip_cleanup: true
   script: python -m twine upload --skip-existing dist/*.whl
   on:
-    # tags: true # Upload on tagged releases
+    all_branches: true
     condition: "$FORCE_DEPLOY = true"
